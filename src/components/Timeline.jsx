@@ -1,47 +1,9 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-
-const timelineData = {
-  professional: [
-    {
-      id: 1,
-      year: '2023 - Present',
-      title: 'Voice Transcriptor Project',
-      company: 'Bachelor\'s Thesis',
-      description: 'Developing a Voice Transcriptor using Whisper AI technology, focusing on speech-to-text conversion and AI integration.',
-      technologies: ['AI', 'Whisper', 'Web Development']
-    },
-    {
-      id: 2,
-      year: '2022 - Present',
-      title: 'Full-stack Developer',
-      company: 'Personal Projects',
-      description: 'Creating modern web applications with focus on AI integration and full-stack development.',
-      technologies: ['React', 'Node.js', 'AI Integration']
-    },
-  ],
-  education: [
-    {
-      id: 1,
-      year: '2020 - Present',
-      title: 'Bachelor\'s Degree in Open Informatics',
-      institution: 'Mendel University',
-      location: 'Brno, Czech Republic',
-      description: 'Final semester student specializing in modern web development and AI technologies. Working on Bachelor\'s thesis: Voice Transcriptor using Whisper AI.',
-    },
-    {
-      id: 2,
-      year: '2016 - 2020',
-      title: 'High School Diploma in IT',
-      institution: 'Vyšší odborná škola a střední škola Boskovice',
-      location: 'Boskovice, Czech Republic',
-      description: 'Information Technology program focusing on software development fundamentals.',
-    },
-  ],
-};
+import { timelineData, timelineTabs } from '../data/timelineData';
 
 const Timeline = () => {
-  const [activeTab, setActiveTab] = useState('professional');
+  const [activeTab, setActiveTab] = useState('education'); // Default tab
   const [hoveredItem, setHoveredItem] = useState(null);
 
   const tabVariants = {
@@ -78,17 +40,17 @@ const Timeline = () => {
 
         {/* Tab Buttons */}
         <div className="flex justify-center space-x-4 mb-12">
-          {['professional', 'education'].map((tab) => (
+          {timelineTabs.map((tab) => (
             <motion.button
-              key={tab}
+              key={tab.id}
               variants={tabVariants}
-              animate={activeTab === tab ? 'active' : 'inactive'}
+              animate={activeTab === tab.id ? 'active' : 'inactive'}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => setActiveTab(tab)}
+              onClick={() => setActiveTab(tab.id)}
               className="px-6 py-2 rounded-full border-2 border-cyan-500 font-medium capitalize transition-all"
             >
-              {tab}
+              {tab.label}
             </motion.button>
           ))}
         </div>
@@ -143,7 +105,7 @@ const Timeline = () => {
                       {item.location && (
                         <p className="text-gray-400 dark:text-gray-300">{item.location}</p>
                       )}
-                      <p className="text-gray-400 dark:text-gray-300">{item.year}</p>
+                      <p className="text-gray-400 dark:text-gray-300">{item.date}</p>
                       <p className="mt-2 text-gray-300 dark:text-gray-400">
                         {item.description}
                       </p>

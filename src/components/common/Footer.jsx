@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { footerContent } from '../../data/textContent';
 
 const Footer = ({ inView }) => {
   return (
@@ -10,7 +11,7 @@ const Footer = ({ inView }) => {
       className="mt-16 text-center"
     >
       <p className="text-white/60 text-sm">
-        {new Date().getFullYear()} Lukáš Kleveta. All rights reserved.
+        {footerContent.copyright("Lukáš Kleveta")}
       </p>
     </motion.div>
   );

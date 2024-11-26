@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { FaEnvelope, FaGithub, FaLinkedin, FaMapMarkerAlt } from 'react-icons/fa';
 import Footer from './common/Footer';
+import { contactContent } from '../data/textContent';
 
 const Contact = () => {
   const [ref, inView] = useInView({
@@ -27,26 +28,11 @@ const Contact = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const contactInfo = [
-    {
-      icon: <FaEnvelope className="text-2xl" />,
-      title: "Email",
-      value: "klevetalukas.work@gmail.com",
-      link: "mailto:klevetalukas.work@gmail.com"
-    },
-    {
-      icon: <FaGithub className="text-2xl" />,
-      title: "GitHub",
-      value: "Deatrix09",
-      link: "https://github.com/Deatrix09"
-    },
-    {
-      icon: <FaMapMarkerAlt className="text-2xl" />,
-      title: "Location",
-      value: "Brno, Czech Republic",
-      link: "#"
-    }
-  ];
+  const iconMap = {
+    Email: <FaEnvelope className="text-2xl" />,
+    GitHub: <FaGithub className="text-2xl" />,
+    Location: <FaMapMarkerAlt className="text-2xl" />,
+  };
 
   return (
     <section className="min-h-screen py-20 section-padding relative" id="contact">
@@ -61,16 +47,16 @@ const Contact = () => {
       <div className="container mx-auto px-4 relative">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 50 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="max-w-4xl mx-auto text-center"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-8 text-gradient">
-            Get In Touch
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient">
+            {contactContent.title}
           </h2>
           <p className="text-lg text-white/80 max-w-2xl mx-auto">
-            Feel free to reach out to me through any of these platforms. I'm always open to new opportunities and connections!
+            {contactContent.description}
           </p>
         </motion.div>
 
@@ -86,7 +72,7 @@ const Contact = () => {
               <div className="relative bg-dark rounded-xl p-8">
                 <h3 className="text-2xl font-bold mb-6 text-gradient">Contact Information</h3>
                 <div className="space-y-6">
-                  {contactInfo.map((info, index) => (
+                  {contactContent.contactInfo.map((info, index) => (
                     <a
                       key={index}
                       href={info.link}
@@ -95,7 +81,7 @@ const Contact = () => {
                       className="flex items-center space-x-4 group"
                     >
                       <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 text-white/90">
-                        {info.icon}
+                        {iconMap[info.title]}
                       </div>
                       <div>
                         <h4 className="text-white group-hover:text-gradient transition-colors duration-300">
@@ -121,7 +107,7 @@ const Contact = () => {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
                     <label htmlFor="name" className="block text-white/90 text-sm font-medium mb-2">
-                      Name
+                      {contactContent.formLabels.name}
                     </label>
                     <input
                       type="text"
@@ -138,7 +124,7 @@ const Contact = () => {
 
                   <div>
                     <label htmlFor="email" className="block text-white/90 text-sm font-medium mb-2">
-                      Email
+                      {contactContent.formLabels.email}
                     </label>
                     <input
                       type="email"
@@ -155,7 +141,7 @@ const Contact = () => {
 
                   <div>
                     <label htmlFor="message" className="block text-white/90 text-sm font-medium mb-2">
-                      Message
+                      {contactContent.formLabels.message}
                     </label>
                     <textarea
                       id="message"
@@ -177,7 +163,7 @@ const Contact = () => {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    Send Message
+                    {contactContent.buttonText}
                   </motion.button>
                 </form>
               </div>
