@@ -36,6 +36,7 @@ const Navbar = () => {
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
     { name: 'Projects', href: '#projects' },
+    { name: 'Timeline', href: '#timeline' },
     { name: 'Skills', href: '#skills' },
     { name: 'Contact', href: '#contact' },
   ];
@@ -106,24 +107,23 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Menu */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden mt-4"
+              className="md:hidden"
             >
-              <div className="flex flex-col space-y-4">
+              <div className="py-4 space-y-4">
                 {navItems.map((item) => (
                   <motion.a
                     key={item.name}
                     href={item.href}
                     onClick={(e) => handleNavClick(e, item.href)}
-                    className="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+                    className="block text-gray-600 dark:text-gray-300 hover:text-primary transition-colors"
+                    whileHover={{ x: 10 }}
                   >
                     {item.name}
                   </motion.a>

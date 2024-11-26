@@ -5,6 +5,7 @@ import About from './components/About';
 import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Contact from './components/Contact';
+import Timeline from './components/Timeline';
 import './styles/index.css';
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Hero />
           <About />
           <Projects />
+          <Timeline />
           <Skills />
           <Contact />
         </main>

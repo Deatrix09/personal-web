@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
@@ -8,18 +8,31 @@ const Skills = () => {
     triggerOnce: true,
   });
 
+  const [hoveredSkill, setHoveredSkill] = useState(null);
+
   const skills = [
     {
       category: 'Mobile Development',
-      items: ['Flutter', 'Swift UI', 'Android - Jetpack Compose'],
+      items: [
+        { name: 'Flutter', level: 80, description: 'Cross-platform mobile development' },
+        { name: 'Swift UI', level: 50, description: 'iOS native development' },
+        { name: 'Android - Jetpack Compose', level: 70, description: 'Modern Android UI toolkit' },
+      ],
     },
     {
       category: 'Backend',
-      items: ['Python', 'PostgreSQL', "Firebase" ],
+      items: [
+        { name: 'Python', level: 85, description: 'Server-side development' },
+        { name: 'PostgreSQL', level: 65, description: 'Database management' },
+        { name: 'Firebase', level: 65, description: 'Backend-as-a-Service' },
+      ],
     },
     {
       category: 'Tools & Others',
-      items: ['Git', 'Docker', 'Firebase'],
+      items: [
+        { name: 'Git', level: 85, description: 'Version control' },
+        { name: 'Docker', level: 65, description: 'Containerization' },
+      ],
     },
   ];
 
@@ -68,31 +81,45 @@ const Skills = () => {
                 <h3 className="text-xl font-semibold mb-4 text-primary">
                   {skillGroup.category}
                 </h3>
-                <div className="space-y-3">
+                <div className="space-y-6">
                   {skillGroup.items.map((skill, skillIndex) => (
                     <motion.div
                       key={skillIndex}
-                      className="flex items-center space-x-2"
+                      className="relative"
+                      onMouseEnter={() => setHoveredSkill(`${index}-${skillIndex}`)}
+                      onMouseLeave={() => setHoveredSkill(null)}
                       initial={{ opacity: 0, x: -20 }}
                       animate={inView ? { opacity: 1, x: 0 } : {}}
                       transition={{ delay: index * 0.1 + skillIndex * 0.1 }}
                     >
-                      <svg
-                        className="w-5 h-5 text-primary"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-gray-600 dark:text-gray-300 font-medium">
+                          {skill.name}
+                        </span>
+                        <span className="text-primary text-sm">
+                          {skill.level}%
+                        </span>
+                      </div>
+                      
+                      <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                        <motion.div
+                          className="h-full bg-gradient-to-r from-cyan-500 to-pink-500"
+                          initial={{ width: 0 }}
+                          animate={{ width: inView ? `${skill.level}%` : 0 }}
+                          transition={{ duration: 1, delay: index * 0.2 + skillIndex * 0.1 }}
                         />
-                      </svg>
-                      <span className="text-gray-600 dark:text-gray-300">
-                        {skill}
-                      </span>
+                      </div>
+
+                      {hoveredSkill === `${index}-${skillIndex}` && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 10 }}
+                          className="absolute mt-2 p-2 bg-white dark:bg-gray-800 rounded-md shadow-lg text-sm text-gray-600 dark:text-gray-300 z-10"
+                        >
+                          {skill.description}
+                        </motion.div>
+                      )}
                     </motion.div>
                   ))}
                 </div>

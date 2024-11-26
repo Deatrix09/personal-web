@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { FaEnvelope, FaGithub, FaLinkedin, FaMapMarkerAlt } from 'react-icons/fa';
+import Footer from './common/Footer';
 
 const Contact = () => {
   const [ref, inView] = useInView({
@@ -184,16 +185,7 @@ const Contact = () => {
           </motion.div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-16 text-center"
-        >
-          <p className="text-white/60 text-sm">
-            {new Date().getFullYear()} Lukáš Kleveta. All rights reserved.
-          </p>
-        </motion.div>
+        <Footer inView={inView} />
       </div>
     </section>
   );
