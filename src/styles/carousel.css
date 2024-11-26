@@ -1,0 +1,76 @@
+.project-slider .slick-dots {
+  bottom: -40px;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.project-slider .slick-dots li {
+  width: auto;
+  height: auto;
+  margin: 0;
+}
+
+.project-slider .slick-dots li button {
+  padding: 0;
+}
+
+.project-slider .slick-dots li button:before {
+  display: none;
+}
+
+/* Custom dot styling */
+.project-slider .slick-dots li button div {
+  width: 8px;
+  height: 8px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+}
+
+.project-slider .slick-dots li.slick-active button div {
+  width: 8px;
+  background: linear-gradient(50deg, #2e89ff,#00cf00);
+  opacity: 1;
+  transform: scale(1.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+}
+
+.project-slider .slick-prev,
+.project-slider .slick-next {
+  width: 40px;
+  height: 40px;
+  z-index: 30;
+}
+
+.project-slider .slick-prev {
+  left: -50px;
+}
+
+.project-slider .slick-next {
+  right: -50px;
+}
+
+.project-slider .slick-prev:before,
+.project-slider .slick-next:before {
+  font-size: 40px;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.project-slider .slick-prev:hover:before,
+.project-slider .slick-next:hover:before {
+  opacity: 1;
+}
+
+@media (max-width: 1024px) {
+  .project-slider .slick-prev {
+    left: 10px;
+  }
+  
+  .project-slider .slick-next {
+    right: 10px;
+  }
+}

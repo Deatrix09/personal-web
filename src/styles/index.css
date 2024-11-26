@@ -1,0 +1,156 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: 147 51 234;
+    --color-secondary: 79 70 229;
+    --color-dark: 17 24 39;
+    --color-light: 249 250 251;
+    --color-accent: 139 92 246;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-dark text-light;
+  }
+}
+
+@layer components {
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+
+  .section-divider {
+    @apply relative py-24;
+  }
+
+  .section-divider::before {
+    content: '';
+    @apply absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent;
+  }
+
+  .section-divider::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-secondary/50 to-transparent;
+  }
+
+  .glass-effect {
+    @apply bg-white/10 backdrop-blur-lg;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-accent to-secondary;
+  }
+
+  .hover-effect {
+    @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+  }
+
+  .btn-primary {
+    @apply px-6 py-3 rounded-full font-medium transition-all duration-300
+           bg-gradient-to-r from-primary to-secondary text-white
+           hover:shadow-lg hover:shadow-primary/25 active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 rounded-full font-medium transition-all duration-300
+           border-2 border-primary text-white hover:bg-primary/10
+           hover:shadow-lg hover:shadow-primary/25 active:scale-95;
+  }
+
+  .card {
+    @apply rounded-xl p-6 transition-all duration-300
+           bg-white/5 backdrop-blur-lg
+           hover:shadow-xl hover:-translate-y-1
+           border border-white/10;
+  }
+
+  .form-input {
+    @apply w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 
+           text-white/90 placeholder-white/50 focus:outline-none 
+           focus:border-primary/50 focus:ring-1 focus:ring-primary/50 
+           transition-colors duration-300;
+  }
+
+  .section-blob {
+    @apply absolute rounded-full filter blur-[100px] opacity-20;
+  }
+
+  .section-blob-1 {
+    @apply -left-40 top-1/4 w-80 h-80 bg-primary/20;
+  }
+
+  .section-blob-2 {
+    @apply -right-40 bottom-1/4 w-80 h-80 bg-secondary/20;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;     /* Firefox */
+  }
+  
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari and Opera */
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-dark/50;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gradient-to-b from-primary to-secondary rounded-full;
+}
+
+/* Gradient background */
+.gradient-bg {
+  @apply fixed inset-0 -z-10 h-full w-full bg-dark;
+  background-image: 
+    radial-gradient(at 27% 37%, hsla(215, 98%, 61%, 0.15) 0px, transparent 50%),
+    radial-gradient(at 97% 21%, hsla(256, 98%, 72%, 0.15) 0px, transparent 50%),
+    radial-gradient(at 52% 99%, hsla(354, 98%, 61%, 0.15) 0px, transparent 50%),
+    radial-gradient(at 10% 29%, hsla(256, 96%, 67%, 0.15) 0px, transparent 50%),
+    radial-gradient(at 97% 96%, hsla(38, 60%, 74%, 0.15) 0px, transparent 50%),
+    radial-gradient(at 33% 50%, hsla(222, 67%, 73%, 0.15) 0px, transparent 50%),
+    radial-gradient(at 79% 53%, hsla(343, 68%, 79%, 0.15) 0px, transparent 50%);
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes blob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(20px, -20px) scale(1.1); }
+  50% { transform: translate(-20px, 20px) scale(0.9); }
+  75% { transform: translate(20px, 20px) scale(1.1); }
+}
+
+.animate-blob {
+  animation: blob 10s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
