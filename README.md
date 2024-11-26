@@ -41,8 +41,8 @@ personal-website/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/Deatrix09/personal-website.git
-   cd personal-website
+   git clone https://github.com/Deatrix09/personal-web.git
+   cd personal-web
    ```
 
 2. **Install dependencies**
